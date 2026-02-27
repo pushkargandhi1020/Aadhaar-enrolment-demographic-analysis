@@ -52,8 +52,8 @@ df["month"] = df["date"].dt.to_period("M").astype(str)
 print(df.info())
 
 #Creating One single Dataset File
-df.to_csv("aadhaar_enrolment_merged.csv", index=False)
-print("Saved as aadhaar_enrolment_merged.csv")
+#df.to_csv("aadhaar_enrolment_merged.csv", index=False)
+#print("Saved as aadhaar_enrolment_merged.csv")
 
 #Demographic Dataset Preprocessing
 # Convert date column (DD-MM-YYYY format)
@@ -75,8 +75,8 @@ print("Cleaned Dataset 2 ready")
 print(dp.info())
 
 #Creating One single Dataset File
-dp.to_csv("aadhaar_demo_merged.csv", index=False)
-print("Saved as aadhaar_demo_merged.csv")
+#dp.to_csv("aadhaar_demo_merged.csv", index=False)
+#print("Saved as aadhaar_demo_merged.csv")
 
 df["state"] = df["state"].str.strip().str.replace(r"\s+", " ", regex=True).str.title()
 dp["state"] = dp["state"].str.strip().str.replace(r"\s+", " ", regex=True).str.title()

@@ -35,3 +35,15 @@ print("Total columns in demographic dataset:", dp.shape[1])
 # Show first 5 rows
 print(df.head())
 print(dp.head())
+
+#Enrolment Dataset Preprocessing
+# Convert date column (DD-MM-YYYY format)
+df["date"] = pd.to_datetime(df["date"], dayfirst=True, errors="coerce")
+
+# Create total enrolments column
+df["total_enrolments"] = df["age_0_5"] + df["age_5_17"] + df["age_18_greater"]
+
+# Create Month column
+df["month"] = df["date"].dt.to_period("M").astype(str)
+
+print(df.info())

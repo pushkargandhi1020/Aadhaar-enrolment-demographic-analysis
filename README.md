@@ -4,25 +4,38 @@ Overview
 This project presents a comprehensive data-driven analysis of Aadhaar enrolment and demographic update activities across India. Using large-scale aggregated datasets, the analysis uncovers societal trends, geographic hotspots, seasonal patterns, anomalies, and operational KPIs to support better service planning and resource allocation.
 The project was developed as part of UIDAI Hackathon 2026 and focuses on transforming raw public data into actionable insights using Python-based analytics.
 ________________________________________
-Objectives
-•	Analyze time-based trends in Aadhaar enrolments and demographic updates
-•	Identify age-wise societal patterns in enrolment and update behavior
-•	Detect state, district, and PIN code hotspots
-•	Perform anomaly detection to capture unusual spikes in demand
-•	Design a combined KPI (Updates-to-Enrolment Ratio) for workload assessment
-•	Propose data-backed recommendations for operational planning
-________________________________________
-Key Insights
-•	Aadhaar enrolment demand is child-driven:
-o	Age 0–5 contributes ~65%
-o	Age 5–17 contributes ~32%
-o	Age 18+ contributes ~3%
-•	Demographic updates are adult-driven, with ~90% from age 17+
-•	Clear seasonal enrolment peak observed in September 2025
-•	High-demand states include Uttar Pradesh, Bihar, Maharashtra, West Bengal, and Madhya Pradesh
-•	District- and PIN-level analysis reveals micro-level service hotspots
-•	Anomaly detection highlights state-month combinations with sudden enrolment spikes
-•	Updates-to-Enrolment Ratio reveals update-heavy regions requiring focused capacity planning
+## Objectives
+
+- Analyze time-based trends in Aadhaar enrolments and demographic updates  
+- Identify age-wise societal patterns in enrolment and update behavior  
+- Detect state, district, and PIN code hotspots  
+- Perform anomaly detection to capture unusual spikes in demand  
+- Design a combined KPI (Updates-to-Enrolment Ratio) for workload assessment  
+- Propose data-backed recommendations for operational planning  
+
+## Key Insights
+
+- Aadhaar enrolment demand is child-driven:
+  - Age 0–5 contributes ~65%  
+  - Age 5–17 contributes ~32%  
+  - Age 18+ contributes ~3%  
+
+- Demographic updates are adult-driven, with ~90% from age 17+  
+
+- Clear seasonal enrolment peak observed in September 2025  
+
+- High-demand states include:
+  - Uttar Pradesh  
+  - Bihar  
+  - Maharashtra  
+  - West Bengal  
+  - Madhya Pradesh  
+
+- District- and PIN-level analysis reveals micro-level service hotspots  
+
+- Anomaly detection highlights state-month combinations with sudden enrolment spikes  
+
+- Updates-to-Enrolment Ratio reveals update-heavy regions requiring focused capacity planning  
 ________________________________________
 Datasets Used
 1. Aadhaar Enrolment Dataset

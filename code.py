@@ -259,5 +259,51 @@ plt.tight_layout()
 #plt.savefig("final_graphs_annotated/A8_anomaly_spikes_annotated.png", dpi=300)
 plt.show()
 
+# Social Trend Metrics
+#Age Group Distribution
+india_age_totals = df[["age_0_5", "age_5_17", "age_18_greater"]].sum()
 
+print(india_age_totals)
+print("Grand Total:", india_age_totals.sum())
 
+#Grand total enrolments check
+grand_total = india_age_totals.sum()
+print("\n Grand Total Enrolments:", grand_total)
+
+#Age percentage share
+age_percent = (india_age_totals / india_age_totals.sum()) * 100
+print("\n Age Group % Contribution:")
+print(age_percent.round(2))
+
+#Graphing the age distribution
+age_totals = df[["age_0_5","age_5_17","age_18_greater"]].sum()
+
+plt.figure(figsize=(7,7))
+plt.pie(age_totals, labels=age_totals.index, autopct="%1.1f%%", startangle=90)
+plt.title("India: Aadhaar Enrolments Age Group Share")
+plt.tight_layout()
+plt.savefig("final_graphs_annotated/A2_enrol_age_share_annotated.png", dpi=300)
+plt.show()
+
+#State-wise age distribution
+df["share_0_5"] = (df["age_0_5"] / df["total_enrolments"]) * 100
+df["share_5_17"] = (df["age_5_17"] / df["total_enrolments"]) * 100
+df["share_18_plus"] = (df["age_18_greater"] / df["total_enrolments"]) * 100
+
+# Handle potential NaN values if total_enrolments was 0 for some rows, setting share to 0
+df[["share_0_5", "share_5_17", "share_18_plus"]] = df[["share_0_5", "share_5_17", "share_18_plus"]].fillna(0)
+
+state_age_share = df.groupby("state")[["share_0_5","share_5_17","share_18_plus"]].mean().sort_values("share_0_5",ascending=False)
+state_age_share.head(10)
+
+# GRAPH : Enrolment Distribution by Age
+top5_states = df.groupby("state")["total_enrolments"].sum().sort_values(ascending=False).head(10).index
+
+state_age = df[df["state"].isin(top5_states)].groupby("state")[["age_0_5","age_5_17","age_18_greater"]].sum()
+
+state_age.plot(kind="bar", figsize=(12,6), stacked=True)
+plt.title("Top 5 States: Age-wise Enrolment Composition (Stacked)")
+plt.xlabel("State")
+plt.ylabel("Enrolments")
+plt.grid(True)
+plt.show()

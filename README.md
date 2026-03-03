@@ -43,27 +43,30 @@ ________________________________________
 Methodology
 The project methodology begins with the consolidation of multi-part datasets into a unified and structured format to ensure consistency and completeness of information. This is followed by comprehensive data cleaning and preprocessing, including handling missing values, correcting inconsistencies, standardizing formats, and removing duplicates to improve data quality. Feature engineering techniques are then applied, such as calculating aggregate totals and extracting temporal attributes like month and year, to enhance analytical depth. Time-series trend analysis is conducted to identify patterns, seasonality, and growth trends over time. Additionally, geographic analysis at the state, district, and PIN code levels is performed to understand regional variations and distribution patterns. Age-based societal trend analysis is incorporated to examine demographic influences and behavioral differences across age groups. Anomaly detection using month-over-month growth metrics is applied to identify unusual spikes or declines in activity. Key Performance Indicators (KPIs) are designed to enable effective workload comparison and performance measurement across different dimensions. Finally, insights are systematically generated and translated into actionable recommendations using a structured insight generation and recommendation framework to support informed decision-making.
 ________________________________________
-Analysis Highlights
-•	Monthly enrolment and update trends
-•	Age-wise contribution analysis
-•	Top states and districts by service demand
-•	PIN code hotspot identification
-•	State-month anomaly detection
-•	Updates-to-Enrolment Ratio (state-wise KPI)
-________________________________________
-Recommendations
-•	Seasonal capacity scaling during peak enrolment months
-•	Child-focused enrolment workflows
-•	District and PIN-level targeted resource deployment
-•	Dedicated update service capacity in update-heavy regions
-•	KPI-driven dual workload planning
-•	Early-warning monitoring using anomaly detection
-________________________________________
-Future Scope
-•	Real-time analytics dashboard
-•	Forecasting models for enrolment and update demand
-•	Integration with geospatial visualization tools
-•	Automation of anomaly alerts
+## Analysis Highlights
+
+- Monthly enrolment and update trends  
+- Age-wise contribution analysis  
+- Top states and districts by service demand  
+- PIN code hotspot identification  
+- State-month anomaly detection  
+- Updates-to-Enrolment Ratio (state-wise KPI)  
+
+## Recommendations
+
+- Seasonal capacity scaling during peak enrolment months  
+- Child-focused enrolment workflows  
+- District and PIN-level targeted resource deployment  
+- Dedicated update service capacity in update-heavy regions  
+- KPI-driven dual workload planning  
+- Early-warning monitoring using anomaly detection  
+
+## Future Scope
+
+- Real-time analytics dashboard  
+- Forecasting models for enrolment and update demand  
+- Integration with geospatial visualization tools  
+- Automation of anomaly alerts  
 ________________________________________
 Author
 Pushkar Gandhi UIDAI Hackathon 2026 Participant

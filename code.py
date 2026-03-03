@@ -51,6 +51,12 @@ df["month"] = df["date"].dt.to_period("M").astype(str)
 
 print(df.info())
 
+print("Enrolment rows:", df.shape[0])
+print("Unique states:", df["state"].nunique())
+print("Unique districts:", df["district"].nunique())
+print("Unique pincodes:", df["pincode"].nunique())
+print("Date range:", df["date"].min(), "to", df["date"].max())
+
 #Creating One single Dataset File
 df.to_csv("aadhaar_enrolment_merged.csv", index=False)
 print("Saved as aadhaar_enrolment_merged.csv")
@@ -90,6 +96,17 @@ print(dp.shape)
 print(dp.isna().sum())
 print(dp.dtypes)
 print(dp["date"].min(), dp["date"].max())
+
+print("Updates rows:", dp.shape[0])
+print("Unique states:", dp["state"].nunique())
+print("Unique districts:", dp["district"].nunique())
+print("Unique pincodes:", dp["pincode"].nunique())
+print("Date range:", dp["date"].min(), "to", dp["date"].max())
+
+print("Total demographic updates:", dp["total_demo_updates"].sum())
+print("Highest update month:\n", dp.groupby("month")["total_demo_updates"].sum().sort_values(ascending=False).head(1))
+
+print("Top 5 states by updates:\n", dp.groupby("state")["total_demo_updates"].sum().sort_values(ascending=False).head(5))
 
 # Summary Tables of enrolment dataset
 # A) India Month-wise Trend
@@ -306,4 +323,141 @@ plt.title("Top 5 States: Age-wise Enrolment Composition (Stacked)")
 plt.xlabel("State")
 plt.ylabel("Enrolments")
 plt.grid(True)
+plt.show()
+
+
+#Demographic Dataset Analysis
+# Clean up state names and create a standardized key for grouping
+# (state_clean is simply the cleaned state name; adjust if further normalization is needed)
+for frame in (df, dp):
+    frame["state"] = frame["state"].str.strip().str.replace(r"\s+", " ", regex=True).str.title()
+    frame["state_clean"] = frame["state"]  # copy cleaned states into a new column
+
+# Now it's safe to group by the new state_clean column
+enrol_state = df.groupby("state_clean")["total_enrolments"].sum().reset_index()
+updates_state = dp.groupby("state_clean")["total_demo_updates"].sum().reset_index()
+
+# A) India Month-wise Trend
+demo_month_table = dp.groupby("month")["total_demo_updates"].sum().reset_index()
+demo_month_table = demo_month_table.sort_values("month")
+
+print("D1 Table: Month-wise Demographic Updates (India)")
+print(demo_month_table.head(10))
+
+# Plotting the trend
+demo_month = dp.groupby("month")["total_demo_updates"].sum().reset_index()
+
+plt.figure(figsize=(12,5))
+plt.plot(demo_month["month"], demo_month["total_demo_updates"], marker="o")
+plt.xticks(rotation=45)
+plt.title("India: Demographic Updates Trend (Month-wise)")
+plt.xlabel("Month")
+plt.ylabel("Total Updates")
+plt.grid(True)
+
+# Peak highlight
+peak_demo_row = demo_month.loc[demo_month["total_demo_updates"].idxmax()]
+peak_demo_month = peak_demo_row["month"]
+peak_demo_value = peak_demo_row["total_demo_updates"]
+
+plt.annotate(
+    f"Peak: {peak_demo_month}\n({peak_demo_value:,})",
+    xy=(peak_demo_month, peak_demo_value),
+    xytext=(peak_demo_month, peak_demo_value * 1.05),
+    arrowprops=dict(arrowstyle="->")
+)
+
+# Total updates text
+total_updates = dp["total_demo_updates"].sum()
+plt.text(0.01, 0.95, f"Total Updates: {total_updates:,}",
+         transform=plt.gca().transAxes, fontsize=10, verticalalignment='top')
+
+plt.tight_layout()
+plt.savefig("final_graphs_annotated/A5_demo_monthly_trend_annotated.png", dpi=300)
+plt.show()
+
+# B) State Ranking
+# ensure state_clean exists for grouping by cleaned state name
+for frame in (df, dp):
+    if "state_clean" not in frame.columns:
+        frame["state"] = frame["state"].str.strip().str.replace(r"\s+"," ",regex=True).str.title()
+        frame["state_clean"] = frame["state"]
+
+demo_state_table = dp.groupby("state")["total_demo_updates"].sum().reset_index()
+demo_state_table = demo_state_table.sort_values("total_demo_updates", ascending=False)
+
+print("D2 Table: Top 10 States by Demographic Updates")
+print(demo_state_table.head(10))
+
+# Plotting the top 10 states Trend
+import matplotlib.pyplot as plt
+import os
+
+os.makedirs("final_graphs_annotated", exist_ok=True)
+
+top_demo_states = (
+    dp.groupby("state_clean")["total_demo_updates"]
+    .sum()
+    .sort_values(ascending=False)
+    .head(10)
+)
+
+top_demo_states_sorted = top_demo_states.sort_values()
+
+plt.figure(figsize=(12,6))
+bars = plt.barh(top_demo_states_sorted.index, top_demo_states_sorted.values)
+
+plt.title("Top 10 States by Total Demographic Updates")
+plt.xlabel("Total Demographic Updates")
+plt.ylabel("State")
+plt.grid(True)
+
+# Add value labels
+for bar in bars:
+    width = bar.get_width()
+    plt.text(width, bar.get_y() + bar.get_height()/2, f"  {int(width):,}", va="center")
+
+plt.tight_layout()
+plt.savefig("final_graphs_annotated/B1_top10_states_demo_updates_labeled.png", dpi=300)
+plt.show()
+
+# C)Age Group Distribution
+demo_age_table = dp[["demo_age_5_17","demo_age_17_plus"]].sum().reset_index()
+demo_age_table.columns = ["age_group", "total_updates"]
+
+print("D3 Table: Age Group Total Demographic Updates (India)")
+print(demo_age_table)
+
+# Graphing the age distribution
+demo_age_totals = dp[["demo_age_5_17","demo_age_17_plus"]].sum()
+
+plt.figure(figsize=(7,7))
+plt.pie(demo_age_totals, labels=demo_age_totals.index, autopct="%1.1f%%", startangle=90)
+plt.title("Demographic Updates: Age Group Share")
+plt.tight_layout()
+plt.savefig("final_graphs_annotated/A6_demo_age_share_annotated.png", dpi=300)
+plt.show()
+
+
+
+kpi = enrol_state.merge(updates_state, on="state_clean", how="inner")
+
+kpi["updates_to_enrolment_ratio"] = kpi["total_demo_updates"] / kpi["total_enrolments"]
+
+top_ratio = kpi.sort_values("updates_to_enrolment_ratio", ascending=False).head(10)
+print(top_ratio)
+
+# Plotting the top 10 states by updates-to-enrolment ratio
+plt.figure(figsize=(12,6))
+bars = plt.barh(top_ratio["state_clean"], top_ratio["updates_to_enrolment_ratio"])
+plt.title("Top 10 States by Demographic Updates to Enrolment Ratio")
+plt.xlabel("Updates to Enrolment Ratio")
+plt.ylabel("State")
+plt.grid(True)
+# Add value labels
+for bar in bars:
+    width = bar.get_width()
+    plt.text(width, bar.get_y() + bar.get_height()/2, f"  {width:.2f}", va="center")
+plt.tight_layout()
+plt.savefig("final_graphs_annotated/B2_top10_states_updates_enrolment_ratio_annotated.png", dpi=300)
 plt.show()

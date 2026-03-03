@@ -33,22 +33,15 @@ Datasets Used
 •	Daily aggregated demographic update counts at PIN code level
 •	Age groups: 5–17, 17+
 •	Coverage: Mar 2025 – Dec 2025
-🛠️ Tools & Technologies
+
+Tools & Technologies
 •	Python
 •	Pandas – data cleaning, aggregation, feature engineering
 •	Matplotlib – data visualization
 •	Google Colab – exploratory analysis and reporting
 ________________________________________
 Methodology
-1.	Consolidation of multi-part datasets
-2.	Data cleaning and preprocessing
-3.	Feature engineering (totals, month extraction)
-4.	Time-series trend analysis
-5.	Geographic analysis (state, district, PIN code)
-6.	Age-based societal trend analysis
-7.	Anomaly detection using month-over-month growth
-8.	KPI design for workload comparison
-9.	Insight generation and recommendation framework
+The project methodology begins with the consolidation of multi-part datasets into a unified and structured format to ensure consistency and completeness of information. This is followed by comprehensive data cleaning and preprocessing, including handling missing values, correcting inconsistencies, standardizing formats, and removing duplicates to improve data quality. Feature engineering techniques are then applied, such as calculating aggregate totals and extracting temporal attributes like month and year, to enhance analytical depth. Time-series trend analysis is conducted to identify patterns, seasonality, and growth trends over time. Additionally, geographic analysis at the state, district, and PIN code levels is performed to understand regional variations and distribution patterns. Age-based societal trend analysis is incorporated to examine demographic influences and behavioral differences across age groups. Anomaly detection using month-over-month growth metrics is applied to identify unusual spikes or declines in activity. Key Performance Indicators (KPIs) are designed to enable effective workload comparison and performance measurement across different dimensions. Finally, insights are systematically generated and translated into actionable recommendations using a structured insight generation and recommendation framework to support informed decision-making.
 ________________________________________
 Analysis Highlights
 •	Monthly enrolment and update trends

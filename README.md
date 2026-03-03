@@ -81,7 +81,7 @@ ________________________________________
 - Integration with geospatial visualization tools  
 - Automation of anomaly alerts  
 ________________________________________
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```
 Aadhaar-enrolment-demographic-analysis/
@@ -92,7 +92,11 @@ Aadhaar-enrolment-demographic-analysis/
 ├── aadhaar_demo_merged.csv
 ├── analysis_notebook.ipynb
 └── README.md
-_________________________________________
-Author
-Pushkar Gandhi UIDAI Hackathon 2026 Participant
+```
 
+---
+
+##  Author
+
+Pushkar Gandhi  
+UIDAI Hackathon 2026 Participant

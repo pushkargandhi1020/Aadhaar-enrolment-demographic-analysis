@@ -90,14 +90,19 @@ ________________________________________
 ## 📂 Project Structure
 
 ```
+## Repository Structure
 Aadhaar-enrolment-demographic-analysis/
 │
 ├── data/
 ├── final_graphs_annotated/
-├── aadhaar_enrolment_merged.csv
+├── .gitattributes
+├── .gitignore
+├── Project Report.pdf
+├── README.md
 ├── aadhaar_demo_merged.csv
-├── analysis_notebook.ipynb
-└── README.md
+├── aadhaar_enrolment_merged.csv
+└── code.py
+```
 ```
 
 ---

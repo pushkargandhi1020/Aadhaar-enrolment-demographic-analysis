@@ -103,9 +103,6 @@ Aadhaar-enrolment-demographic-analysis/
 ├── aadhaar_enrolment_merged.csv
 └── code.py
 ```
-```
-
----
 
 ##  Author
 

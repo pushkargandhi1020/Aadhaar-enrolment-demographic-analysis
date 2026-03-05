@@ -1,7 +1,7 @@
 # Aadhaar-enrolment-demographic-analysis
 Aadhaar Enrolment & Demographic Trends Analysis (India)
-Overview
-This project presents a comprehensive data-driven analysis of Aadhaar enrolment and demographic update activities across India. Using large-scale aggregated datasets, the analysis uncovers societal trends, geographic hotspots, seasonal patterns, anomalies, and operational KPIs to support better service planning and resource allocation.
+# Overview
+-This project presents a comprehensive data-driven analysis of Aadhaar enrolment and demographic update activities across India. Using large-scale aggregated datasets, the analysis uncovers societal trends, geographic hotspots, seasonal patterns, anomalies, and operational KPIs to support better service planning and resource allocation.
 The project was developed as part of UIDAI Hackathon 2026 and focuses on transforming raw public data into actionable insights using Python-based analytics.
 ________________________________________
 ## Objectives
